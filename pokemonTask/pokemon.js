@@ -1,17 +1,27 @@
-'use strict'
+let list = [];
+let pokemons = [];
+fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    .then(resp => resp.json())
+    .then(data => {
+        list = data.results;
+        // LOOP OVER EVERY POKEMON
+        list.forEach(poke => {
+            fetch(poke.url)
+                .then(resp => resp.json())
+                .then(pokeObject => {
+                    pokemons.push(pokeObject);
 
- class Pokemon {
-    constructor(name, elements, img) {
-        this.name = name;
-         this.elements = elements;
-         this.img = img;
+                });
+        });
+
+    });
+
+window.onload = function () {
+    setTimeout(buildList, 3000);
+
+    function buildList() {
+        console.log(pokemons);
     }
- }
+}
 
-
-const fetchpoke = fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then(response => response.json())
-    .then(data => console.log(data))
-
-
-console.log(fetchpoke.results.name)
+console.log(pokemons);
