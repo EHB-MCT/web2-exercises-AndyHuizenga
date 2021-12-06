@@ -3,7 +3,7 @@ fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     .then(resp => resp.json())
     .then(data => {
         console.log(data.drinks)
-        let random = Math.floor(Math.random() * 6)
+        let random = Math.floor(Math.random() * 20)
         console.log(random)
         list = data.drinks[random];
 
